@@ -18,9 +18,12 @@ let pokemonRepository = (function () {
     ]
     
     function add(pokemon){
-        pokemonList.push(pokemon);
-    };
-
+        if(typeof(pokemon) === "object" && pokemon!=null && Object.keys(pokemon.name) && Object.keys(pokemon.height) && Object.keys(pokemon.types)) {
+            pokemonList.push(pokemon)
+        } else {
+            return alert('Pokemon needs to be an object');
+        };
+    }
     function getAll() {
         return pokemonList;
     };
