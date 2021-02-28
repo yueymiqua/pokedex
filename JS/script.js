@@ -18,10 +18,13 @@ let pokemonRepository = (function () {
     ]
     
     function add(pokemon){
-        if(typeof(pokemon) === "object" && pokemon!=null && Object.keys(pokemon.name) && Object.keys(pokemon.height) && Object.keys(pokemon.types)) {
+        if(typeof(pokemon) === "object" && pokemon!=null && 
+        Object.keys(pokemon)[0]===Object.keys(pokemonList[0])[0] && 
+        Object.keys(pokemon)[1]===Object.keys(pokemonList[0])[1] && 
+        Object.keys(pokemon)[2]===Object.keys(pokemonList[0])[2]) {
             pokemonList.push(pokemon)
         } else {
-            return alert('Pokemon needs to be an object');
+            return alert('Pokemon needs to be an object and \n have a name, height, and type property.');
         };
     }
     function getAll() {
@@ -35,10 +38,20 @@ let pokemonRepository = (function () {
 
 })();
 
+//filters the pokemon list to check pokemon name
+let filteredPokemon = pokemonRepository.getAll().filter((pokemon) => {
+    return pokemon.name == "Squirtle";
+})
+console.log(filteredPokemon);
+document.write('Name:' + filteredPokemon[0] + ' Height:' + filteredPokemon[1] + 'cm Type:' + filteredPokemon[2] + '<br>');
+
+//gets full list of pokemon
 pokemonRepository.getAll().forEach((pokemon) => {
     document.write('Name:' + pokemon.name + ' Height:' + pokemon.height + 'cm Type:' + pokemon.types + '<br>');
 });
 
+//add the pokemon to the pokemon list
+pokemonRepository.add({name: 'Electabuzz', height: 110, types: ['Electric']});
 
 
 
