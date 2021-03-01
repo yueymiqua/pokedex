@@ -1,5 +1,5 @@
 img[alt='logo'] {
-  width: 200px;
+  width: 15vw;
   display: block;
   height: auto;
   right: 30px;
@@ -8,22 +8,25 @@ img[alt='logo'] {
   border-color: violet;
 }
 
+ul {
+  width: 25vw;
+  padding: 10px;
+  background-color: cornflowerblue;
+}
+li {
+  list-style-type: none;
+  margin: 0px 10px;
+}
+
+button {
+  width: 23vw;
+  text-align: left;
+}
+
+/* image styling for later
 img[alt='squirtle'],
 img[alt='ivysaur'],
 img[alt='charizard'] {
   width: 200px;
   height: 200px;
-}
-
-.pokechart {
-  width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  color: green;
-  background-color: sandybrown;
-  text-align: center;
-}
-
-/* p {
-  color: green;
 } */
