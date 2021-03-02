@@ -1,49 +1,17 @@
 let pokemonRepository = (function () {
-    let pokemonList = [
-        {
-            name: 'Squirtle',
-            height: 51,
-            types: ['Water']
-        },
-        {
-            name: 'Charizard',
-            height: 170,
-            types: ['Fire', 'Flying' ]
-        },
-        {
-            name: 'Ivysaur',
-            height: 99,
-            types: ['Grass', 'Poison']
-        },
-        {
-            name: 'Alakazam',
-            height: 150,
-            types: ['Psychic']
-        },
-        {
-            name: 'Snorlax',
-            height: 211,
-            types: ['Normal']
-        },
-        {
-            name: 'Dragonite',
-            height: 221,
-            types: ['Dragon', 'Flying']
-        }
-    ]
+    let pokemonList = [];
+
+    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     
+    let heading = document.querySelector('.heading');
+
+    let logo = document.querySelector('.logo');
+
     //adds a new pokemon to the list
     function add(pokemon){
-        if(typeof(pokemon) === "object" && pokemon!=null && //only accepts input if it is an object and is not "null"
-        //only accepts input if it is an object with a "name", "height", and "types" filed
-        Object.keys(pokemon)[0]===Object.keys(pokemonList[0])[0] && 
-        Object.keys(pokemon)[1]===Object.keys(pokemonList[0])[1] && 
-        Object.keys(pokemon)[2]===Object.keys(pokemonList[0])[2]) {
-            pokemonList.push(pokemon)
-        } else {
-            return alert('Pokemon needs to be an object and \n have a name, height, and type property.');
-        };
+        pokemonList.push(pokemon)
     }
+
     //returns the full list of pokemon 
     function getAll() {
         return pokemonList;
@@ -69,41 +37,99 @@ let pokemonRepository = (function () {
         })
     }
     
-    //addListItem function will call this showDetails function when a button is clicked and the pokemon object will be logged
+    // addListItem function will call this showDetails function when a button is clicked and the pokemon object will be logged
     function showDetails(pokemon) {
-        console.log("Name:" + pokemon.name + " Height:" + pokemon.height + " Type:" + pokemon.types);
+        loadDetails(pokemon).then(function() {
+            console.log(pokemon);
+        })
+    }
+
+    function showLoadingMessage() {
+        heading.innerText = ('Pokedex loading...please wait');
+        // unorderedList.classList.add('is-loading');
+        // if (element.classList.contains('is-loading')){
+        //     element.innerText=("Pokemon List is Populating....Please Wait")
+        // }
+    }
+
+    function hideLoadingMessage() {
+        heading.innerText = ('Pokedex');
+    }
+
+    // loads the full list of pokemon objects from API url onto pokemonList array 
+    function loadList(){
+        showLoadingMessage();
+        return fetch(apiUrl).then(function(response) {
+            return response.json();
+        }).then(function(json) {
+            hideLoadingMessage();
+            return json.results.forEach(function(item) {
+                let pokemon = {
+                    name: item.name,
+                    detailsUrl: item.url
+                }
+                add(pokemon);
+            });
+        }).catch(function(e) {
+            hideLoadingMessage();
+            console.error(e);
+        })
+    }
+
+    // load the other properties of the pokemon when button is clicked
+    function loadDetails(item){
+        showLoadingMessage();
+        let url = item.detailsUrl;
+        return fetch(url).then(function(response) {
+            return response.json();
+        }).then(function(details) {
+            hideLoadingMessage();
+            item.imageUrl = details.sprites.front_default;
+            item.height = details.height;
+            item.types = details.types;
+            logo.src = item.imageUrl;
+        }).catch(function(e) {  
+            hideLoadingMessage();
+            console.error(e);
+        });
     }
 
     return {
-        add: add,
+        add: add, // not required to return as access outside of function not required
         getAll: getAll,
+        loadList: loadList,
         addListItem: addListItem,
-        showDetails: showDetails
+        loadDetails: loadDetails // not required to return as access outside of function not required
     };
 
 })();
 
-//gets full list of pokemon and runs a loop for each pokemon object in the array
-pokemonRepository.getAll().forEach((pokemon) => {
-    //calls the addListItem function for each pokemon object in the array
-    pokemonRepository.addListItem(pokemon);
-});
-//before DOM manipulation, code was document.write('Name:' + pokemon.name + ' Height:' + pokemon.height + 'cm Type:' + pokemon.types + '<br>');
+//loads full list of pokemon from the API
+pokemonRepository.loadList().then(function() {
+    //gets full list of pokemon and runs a loop for each pokemon object in the array
+    pokemonRepository.getAll().forEach(function(pokemon) {
+        //calls the addListItem function for each pokemon object in the array
+        pokemonRepository.addListItem(pokemon);
+    });
+})
 
 
 
 
 
 
-
-
-//add the pokemon to the pokemon list
-pokemonRepository.add({name: 'Electabuzz', height: 110, types: ['Electric']});
 
 //filters the pokemon list to check pokemon name
-let filteredPokemon = pokemonRepository.getAll().filter((pokemon) => {
-    return pokemon.name == "Charizard";
-})
+// let filteredPokemon = pokemonRepository.getAll().filter((pokemon) => {
+//     return pokemon.name == "Charizard";
+// })
+
+        // if(typeof(pokemon) === "object" && pokemon!=null && //only accepts input if it is an object and is not "null"
+        // //only accepts input if it is an object with a "name", "height", and "types" filed
+        // Object.keys(pokemon)[0]===Object.keys(pokemonList[0])[0] && 
+        // Object.keys(pokemon)[1]===Object.keys(pokemonList[0])[1] && 
+        // Object.keys(pokemon)[2]===Object.keys(pokemonList[0])[2]) {
+
 //document.write('Name:' + filteredPokemon[0].name + ' Height:' + filteredPokemon[0].height + 'cm Type:' + filteredPokemon[0].types + '<br>');
 
 

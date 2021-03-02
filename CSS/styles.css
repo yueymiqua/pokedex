@@ -1,11 +1,13 @@
-img[alt='logo'] {
-  width: 15vw;
+.logo {
+  width: 20vw;
   display: block;
   height: auto;
-  right: 30px;
   border-width: 3px;
   border-style: dotted;
   border-color: violet;
+  position: fixed;
+  right: 40vw;
+  bottom: 40vh;
 }
 
 ul {
@@ -22,11 +24,3 @@ button {
   width: 23vw;
   text-align: left;
 }
-
-/* image styling for later
-img[alt='squirtle'],
-img[alt='ivysaur'],
-img[alt='charizard'] {
-  width: 200px;
-  height: 200px;
-} */
