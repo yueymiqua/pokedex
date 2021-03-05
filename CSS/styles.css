@@ -1,13 +1,25 @@
+body {
+  background-color: ivory;
+}
+
+.nav-item,
+.navbar,
+.navbar-pokedex,
+.collapse {
+  background-color: ivory;
+}
+.list-group-item {
+  background-color: ivory;
+}
+
 .logo {
-  width: 15vw;
-  display: block;
+  width: 60px;
   height: auto;
-  border-width: 3px;
-  border-style: dotted;
-  border-color: violet;
-  position: fixed;
-  right: 5px;
-  top: 5px;
+}
+
+.pokemon-item {
+  background-color: #6e173a;
+  color: ivory;
 }
 
 h1 {
@@ -15,12 +27,10 @@ h1 {
 }
 
 ul {
-  width: 60vw;
-  padding: 10px;
-  background-color: #3d9970;
+  background-color: #6e173a;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 li {
@@ -29,81 +39,20 @@ li {
   text-align: center;
 }
 
-button {
-  width: 55vw;
-  text-align: center;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: bolder;
-  cursor: pointer;
+.heading {
+  color: ivory;
+  background-color: #c42c64;
 }
 
-.pokemon-details {
+.pokemon-details,
+.pokemon-name {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pokemon-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 40%;
-  width: auto;
-}
-
-#modal-container {
-  display: none;
-}
-
-#modal-container.is-visible {
-  position: fixed;
-  padding: 20px;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-
-  /* to show it above other content */
-  z-index: 999;
-
-  /* to allow scrolling if the screen is not high enough*/
-  overflow: auto;
-
-  /* this is used to center the modal */
-  display: grid;
-  text-align: center;
-}
-
-.modal {
-  margin: auto;
-  display: inline-block;
-  box-sizing: border-box;
-  background: #fff;
-  padding: 15px;
-  width: 100%;
-  max-width: 300px;
-  text-align: left;
-}
-
-.modal-close {
-  padding: 0;
-  margin: 0;
-  width: 20px;
-  height: 20px;
-  float: right;
-  -webkit-appearance: none;
-  border: 0;
-  background-color: red;
-  color: ivory;
-  border-radius: 0%;
-  cursor: pointer;
-}
-
-.modal h1 {
-  margin-top: 0;
-}
-
-.modal p {
-  margin-bottom: 0;
 }

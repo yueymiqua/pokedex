@@ -1,17 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Required Metatags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Simple JS App</title>
     <link rel="stylesheet" type="text/css" href="CSS/styles.css">
   </head>
-  <body>
-    <img src="IMG/pikachu-clipart-jpeg-2.jpg" alt="logo" class="logo">  
+  <body>    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-pokedex" href="index.html">
+        <img src="IMG/pokeball-in-title.png" alt="logo" class="logo">  
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-pokedex" aria-controls="navbar-pokedex" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     
+      <div class="collapse navbar-collapse" id="navbar-pokedex">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://pokeapi.co/api/v2/pokemon/?limit=150" target=_blank>API Data Source</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://yueymiqua.github.io/website-portfolio/" target=_blank>About Creator</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
     <h1 class='heading'>Pokedex</h1>
-    <ul class='pokemon-list'></ul>
-    <div id='modal-container'></div>
+    <ul class='pokemon-list list-group'></ul>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="pokemon-name" id="exampleModalLabel">Modal title</h5>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- uses jQuery through content delivery network (CDN) -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script> 
+    
+    <!-- Bootstrap jQueyr, popper, then bootrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     
     <script src="JS/fetch-polyfill.js"></script>
     <script src="JS/promise-polyfill.js"></script>
