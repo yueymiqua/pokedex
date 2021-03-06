@@ -3,11 +3,6 @@ let pokemonRepository = (function () {
 
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
     
-    let heading = document.querySelector('.heading');
-
-    //initialized immediately as the pokemonRepository function is called so it can be used in the eventListeners that trigger hideModal
-    let modalContainer = document.querySelector('#modal-container');
-
     // loads the full list of pokemon objects from API url onto pokemonList array 
     function loadList(){
         showLoadingMessage();
@@ -106,12 +101,16 @@ let pokemonRepository = (function () {
 
     // shows loading message when API is fetching data from server
     function showLoadingMessage() {
-        heading.innerText = ('Pokedex loading...please wait');
+        // heading.innerText = ('Pokedex loading...please wait');
+        $('.heading').text('Pokedex loading...please wait');
+
     }
 
     // hides loading message after data is fetched
     function hideLoadingMessage() {
-        heading.innerText = ('Pokedex');
+        // heading.innerText = ('Pokedex');
+        $('.heading').text('Pokedex');
+
     }
 
     return {
