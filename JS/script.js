@@ -1,10 +1,19 @@
-let pokemonRepository = (function () {
-    let pokemonList = [];
+$('.enter-pokemon-number').on('click', function() {
+    let pokeNum;
+    loadList();
+})
 
-    let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+let pokemonRepository = (function () {
+
+    let pokemonList = [];
     
     // loads the full list of pokemon objects from API url onto pokemonList array 
     function loadList(){
+
+        pokeNum = $('.pokemon-number').val();
+
+        let apiUrl = `https://pokeapi.co/api/v2/pokemon/?limit=${pokeNum}`;
+
         showLoadingMessage();
         return fetch(apiUrl).then(function(response) {
             return response.json();
@@ -15,18 +24,18 @@ let pokemonRepository = (function () {
                     name: item.name.toUpperCase(),
                     height: item.height,
                     detailsUrl: item.url
-                }
+                };
                 add(pokemon);
             });
         }).catch(function(e) {
             hideLoadingMessage();
             console.error(e);
-        })
+        });
     }
 
     //adds a new pokemon to the list
     function add(pokemon){
-        pokemonList.push(pokemon)
+        pokemonList.push(pokemon);
     }
 
     //returns the full list of pokemon 
@@ -44,8 +53,8 @@ let pokemonRepository = (function () {
         let button = document.createElement('button');
         button.innerText = (pokemon.name);
         button.classList.add('pokemon-item', 'btn');
-        button.setAttribute('data-toggle', 'modal')
-        button.setAttribute('data-target', '#exampleModal')
+        button.setAttribute('data-toggle', 'modal');
+        button.setAttribute('data-target', '#exampleModal');
         listOfPokemon.appendChild(listItem);
         listItem.appendChild(button);
         addListenerToButton(button, pokemon); 
@@ -55,7 +64,7 @@ let pokemonRepository = (function () {
     function addListenerToButton(button, pokemon) {
         button.addEventListener('click', function(){
             showDetails(pokemon);
-        })
+        });
     }
     
     //this function is called when event listener hears the button click
@@ -79,7 +88,7 @@ let pokemonRepository = (function () {
             modalBody.append(pokemonDetails);
             modalBody.append(pokemonImage);
 
-        })
+        });
     }
 
     // load the other properties of the pokemon when button is clicked
@@ -101,14 +110,12 @@ let pokemonRepository = (function () {
 
     // shows loading message when API is fetching data from server
     function showLoadingMessage() {
-        // heading.innerText = ('Pokedex loading...please wait');
         $('.heading').text('Pokedex loading...please wait');
 
     }
 
     // hides loading message after data is fetched
     function hideLoadingMessage() {
-        // heading.innerText = ('Pokedex');
         $('.heading').text('Pokedex');
 
     }
@@ -124,10 +131,14 @@ let pokemonRepository = (function () {
 })();// pokemonReposity function is ran right away due to adding those open/close round brackets at the end
 
 //loads full list of pokemon from the API
-pokemonRepository.loadList().then(function() {
-    //gets full list of pokemon and runs a loop for each pokemon object in the array
-    pokemonRepository.getAll().forEach(function(pokemon) {
-        //calls the addListItem function for each pokemon object in the array
-        pokemonRepository.addListItem(pokemon);
-    });
-})
+function loadList () {
+    pokemonRepository.loadList().then(function() {
+        //gets full list of pokemon and runs a loop for each pokemon object in the array
+        pokemonRepository.getAll().forEach(function(pokemon) {
+            //calls the addListItem function for each pokemon object in the array
+            pokemonRepository.addListItem(pokemon);
+        });
+    })
+}
+
+

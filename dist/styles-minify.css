@@ -15,6 +15,13 @@ body {
   width: 60px;
   height: auto;
 }
+.pokemon-number,
+.enter-pokemon-number {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+}
 .pokemon-item {
   background-color: #6e173a;
   color: ivory;
@@ -37,7 +44,8 @@ li {
   padding: 2px;
   text-align: center;
 }
-.heading {
+.heading,
+.enter-pokemon-number {
   color: ivory;
   background-color: #c42c64;
 }
